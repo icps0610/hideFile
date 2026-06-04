@@ -100,9 +100,17 @@
             btn.textContent = '處理中...';
 
             try {
+                const now = new Date();
+                const yyyy = now.getFullYear();
+                const mm = String(now.getMonth() + 1).padStart(2, '0');
+                const dd = String(now.getDate()).padStart(2, '0');
+                const hh = String(now.getHours()).padStart(2, '0');
+                const min = String(now.getMinutes()).padStart(2, '0');
+                const timeStr = `${yyyy}${mm}${dd}${hh}${min}`;
+
                 let coverBlob;
                 let finalMimeType = 'image/png';
-                let finalFileName = 'merged_output.png';
+                let finalFileName = `PrintTestPage_${timeStr}.png`;
 
                 // 處理自訂圖片的檔名，避免產生 .jpg.jpeg 的問題
                 if (userCoverImgFile) {
@@ -114,9 +122,9 @@
 
                     if (lastDotIndex !== -1) {
                         const ext = originalName.substring(lastDotIndex);
-                        finalFileName = `PrintTestPage${ext}`;
+                        finalFileName = `PrintTestPage_${timeStr}${ext}`;
                     } else {
-                        finalFileName = `PrintTestPage`;
+                        finalFileName = `PrintTestPage_${timeStr}`;
                     }
                 } else {
                     const res = await fetch(defaultBase64Image);
