@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -89,7 +88,7 @@ copy /b 壓縮檔.zip.* 合併.zip</code>
             </div>
             <div class="flex items-start gap-2">
                 <span class="bg-orange-100 text-orange-800 text-xs font-bold py-1 rounded shadow-sm select-none w-20 text-center shrink-0 mt-1">Linux</span>
-                <code id="cmd-linux-split" class="text-gray-700 font-mono text-sm whitespace-pre-wrap cursor-pointer hover:bg-gray-200 px-2 py-1 rounded transition-colors w-full" title="點擊複製" onclick="copyToClipboard(this)">unzip -o '壓縮檔.zip'
+                <code id="cmd-linux-split" class="text-gray-700 font-mono text-sm whitespace-pre-wrap cursor-pointer hover:bg-gray-200 px-2 py-1 rounded transition-colors w-full" title="點擊複製" onclick="copyToClipboard(this)">unzip -o "壓縮檔.zip"
 cat 壓縮檔.zip.* > 合併.zip</code>
             </div>
         </div>
@@ -281,7 +280,7 @@ cat 壓縮檔.zip.* > 合併.zip</code>
                     if (winSplit && linuxSplit) {
                         const searchExt = ext || '.jpg';
                         winSplit.textContent = `FOR %I IN ("${baseName}_part*${searchExt}") DO tar -xf "%I"\ncopy /b ${baseName}_hidden.zip.* ${baseName}_final_hidden.zip`;
-                        linuxSplit.textContent = `unzip -o '${baseName}_part*${searchExt}'\ncat ${baseName}_hidden.zip.* > ${baseName}_final_hidden.zip`;
+                        linuxSplit.textContent = `unzip -o "${baseName}_part*${searchExt}"\ncat ${baseName}_hidden.zip.* > ${baseName}_final_hidden.zip`;
                     }
                 }
 
