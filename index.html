@@ -24,7 +24,7 @@
                 </div>
             </div>
 
-            <input type="file" id="coverImgInput" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 mb-3">
+            <input type="file" id="coverImgInput" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 file:cursor-pointer cursor-pointer mb-3">
 
             <div id="previewArea" class="w-full h-48 bg-gray-50 border-2 border-dashed border-gray-300 flex items-center justify-center rounded overflow-hidden p-2">
                 <img id="previewImg" src="" alt="表面圖片預覽" class="max-h-full object-contain">
@@ -35,7 +35,7 @@
             <label class="block text-gray-700 text-sm font-bold mb-2" for="hiddenFileInput">
                 2. 選擇要壓縮並隱藏的檔案 (可多選)
             </label>
-            <input type="file" id="hiddenFileInput" multiple class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100 mb-3">
+            <input type="file" id="hiddenFileInput" multiple class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 file:cursor-pointer cursor-pointer mb-3">
             <div class="flex flex-wrap items-center gap-2 bg-gray-50 px-3 py-2 rounded border border-gray-200">
                 <label class="text-gray-700 text-sm font-bold whitespace-nowrap">分割設定</label>
                 <select id="splitType" class="border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:border-blue-500 bg-white">
@@ -65,22 +65,17 @@
         </div>
 
 
-        
+
         <hr class="my-6 border-gray-300">
 
-        <h2 class="text-xl font-bold text-gray-800 mb-4">3. 線上合併分割圖片 (還原碎片)</h2>        
+        <h2 class="text-xl font-bold text-gray-800 mb-4">3. 線上合併分割圖片 (還原碎片)</h2>
 
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2">上傳所有分割圖片 (可多選)：</label>
-            <input type="file" id="splitPartsInput" multiple accept="image/*,.zip" class="block w-full text-sm text-gray-500
-                file:mr-4 file:py-2 file:px-4
-                file:rounded-md file:border-0
-                file:text-sm file:font-semibold
-                file:bg-green-50 file:text-green-700
-                hover:file:bg-green-100 border border-gray-300 rounded px-2 py-1 cursor-pointer">
+            <input type="file" id="splitPartsInput" multiple accept="image/*,.zip" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 file:cursor-pointer cursor-pointer mb-3">
         </div>
-        
-        <button id="restoreMergeBtn" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-150 ease-in-out mb-2">
+
+        <button id="restoreMergeBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-150 ease-in-out mb-2">
             開始還原合併並下載
         </button>
         <p id="restoreMsg" class="mb-4 text-sm text-center hidden"></p>
@@ -203,7 +198,7 @@ cat 壓縮檔.zip.* > 合併.zip</code>
                 // 取得分割設定
                 const type = splitType.value;
                 const val = parseFloat(splitValue.value) || 0;
-                
+
                 // 壓縮所有的隱藏檔案為單一 ZIP
                 const innerZipWriter = new zip.ZipWriter(new zip.BlobWriter("application/zip"), {
                     password: currentPassword
@@ -249,7 +244,7 @@ cat 壓縮檔.zip.* > 合併.zip</code>
                     msgEl.classList.remove('hidden');
 
                     const masterZipWriter = new zip.ZipWriter(new zip.BlobWriter("application/zip"));
-                    
+
                     const extMatch = finalFileName.match(/(\.[^.]+)$/);
                     const ext = extMatch ? extMatch[1] : '';
                     const baseName = finalFileName.replace(/(\.[^.]+)$/, '');
@@ -263,13 +258,13 @@ cat 壓縮檔.zip.* > 合併.zip</code>
                         const partZipBlob = await partZipWriter.close();
 
                         const mergedBlob = new Blob([coverBlob, partZipBlob], { type: finalMimeType });
-                        
+
                         const partName = `${baseName}_part${i + 1}${ext}`;
                         await masterZipWriter.add(partName, new zip.BlobReader(mergedBlob));
                     }
-                    
+
                     const finalDownloadBlob = await masterZipWriter.close();
-                    
+
                     const downloadUrl = URL.createObjectURL(finalDownloadBlob);
                     const a = document.createElement('a');
                     a.href = downloadUrl;
@@ -282,7 +277,7 @@ cat 壓縮檔.zip.* > 合併.zip</code>
                     // 動態更新畫面的指令以包含正確的檔名
                     const winSplit = document.getElementById('cmd-win-split');
                     const linuxSplit = document.getElementById('cmd-linux-split');
-                    
+
                     if (winSplit && linuxSplit) {
                         const searchExt = ext || '.jpg';
                         winSplit.textContent = `FOR %I IN ("${baseName}_part*${searchExt}") DO tar -xf "%I"\ncopy /b ${baseName}_hidden.zip.* ${baseName}_final_hidden.zip`;
@@ -334,10 +329,10 @@ cat 壓縮檔.zip.* > 合併.zip</code>
                         reader = new zip.ZipReader(new zip.BlobReader(file));
                         const entries = await reader.getEntries();
                         if (entries.length === 0) throw new Error("Empty");
-                        
+
                         const entry = entries[0];
                         const filename = entry.filename;
-                        
+
                         const extMatch = filename.match(/\.(\d+)$/);
                         let partNum = i;
                         if (extMatch) partNum = parseInt(extMatch[1], 10);
