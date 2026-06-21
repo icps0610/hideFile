@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -13,10 +14,8 @@
         <h2 class="text-2xl font-bold mb-6 text-gray-800">HideFile</h2>
 
         <div class="mb-6">
-            <div class="flex flex-wrap items-center justify-between mb-2 gap-2">
-                <label class="block text-gray-700 text-sm font-bold" for="coverImgInput">
-                    1. 表面圖片
-                </label>
+            <div class="flex flex-wrap items-center justify-between mb-4 gap-2">
+                <h2 class="text-xl font-bold text-gray-800">1. 表面圖片</h2>
                 <div class="flex items-center gap-2 bg-gray-50 px-2 py-1 rounded border border-gray-200">
                     <label class="text-gray-700 text-sm font-bold whitespace-nowrap" for="passwordInput">密碼</label>
                     <input type="text" id="passwordInput" value="8964" class="border border-gray-300 rounded px-2 py-1 text-sm w-20 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
@@ -31,15 +30,13 @@
         </div>
 
         <div class="mb-6">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="hiddenFileInput">
-                2. 選擇要壓縮並隱藏的檔案 (可多選)
-            </label>
+            <h2 class="text-xl font-bold text-gray-800 mb-4">2. 選擇要壓縮並隱藏的檔案 (可多選)</h2>
             <input type="file" id="hiddenFileInput" multiple class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 file:cursor-pointer cursor-pointer mb-3">
             <div class="flex flex-wrap items-center gap-2 bg-gray-50 px-3 py-2 rounded border border-gray-200">
-                <label class="text-gray-700 text-sm font-bold whitespace-nowrap">分割設定</label>
+                <label class="text-gray-700 text-sm font-bold whitespace-nowrap">分割設定依</label>
                 <select id="splitType" class="border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:border-blue-500 bg-white">
-                    <option value="size">依大小 (MB)</option>
-                    <option value="count">依數量 (等分)</option>
+                    <option value="size">大小 (MB)</option>
+                    <option value="count">數量</option>
                 </select>
                 <input type="number" id="splitValue" value="0" min="0" step="0.1" class="border border-gray-300 rounded px-2 py-1 text-sm w-20 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
             </div>
@@ -70,7 +67,6 @@
         <h2 class="text-xl font-bold text-gray-800 mb-4">3. 線上合併分割圖片 (還原碎片)</h2>
 
         <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2">上傳所有分割圖片 (可多選)：</label>
             <input type="file" id="splitPartsInput" multiple accept="image/*,.zip" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 file:cursor-pointer cursor-pointer mb-3">
         </div>
 
